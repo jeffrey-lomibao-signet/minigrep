@@ -1,4 +1,4 @@
-use minigrep::Config;
+use minigrep::config::Config;
 use std::{env, process};
 
 fn main() {

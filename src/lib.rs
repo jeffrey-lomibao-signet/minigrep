@@ -7,10 +7,15 @@ mod search;
 pub fn run(config: config::Config) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.filename)?;
 
-    for line in search::search(&config.query, &contents) {
+    let results = if config.case_sensitive {
+        search::search(&config.query, &contents)
+    } else {
+        search::search_case_insensitive(&config.query, &contents)
+    };
+
+    for line in results {
         println!("{}", line);
     }
 
     Ok(())
 }
-
